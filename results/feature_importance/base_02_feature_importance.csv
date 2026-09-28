@@ -1,0 +1,148 @@
+base,modelo,feature,metodo,aumento_mae,desvio
+base_02,SVR,hora,permutation_validacao,14.85663687964715,0.9406940087908943
+base_02,SVR,dia_semana,permutation_validacao,-0.12644148118077206,1.5753036784495584
+base_02,SVR,mes,permutation_validacao,0.0,0.0
+base_02,SVR,fim_de_semana,permutation_validacao,17.878788298941497,2.865524109412311
+base_02,SVR,hora_sin,permutation_validacao,22.282077759410356,3.5867639350373293
+base_02,SVR,hora_cos,permutation_validacao,64.81536022822606,5.273192825423753
+base_02,SVR,semana_sin,permutation_validacao,-5.026563212995313,3.670204580661824
+base_02,SVR,semana_cos,permutation_validacao,-0.1799554696509252,3.8513938867179207
+base_02,SVR,ano_sin,permutation_validacao,-0.3221597662060465,0.05379619451230545
+base_02,SVR,ano_cos,permutation_validacao,-0.990479453328779,0.21030717029102125
+base_02,SVR,temp_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,SVR,temp_lag1,permutation_validacao,1.8886963610803111,0.5353312774603356
+base_02,SVR,rain_1h_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,SVR,rain_1h_lag1,permutation_validacao,0.0,0.0
+base_02,SVR,snow_1h_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,SVR,snow_1h_lag1,permutation_validacao,0.0,0.0
+base_02,SVR,clouds_all_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,SVR,clouds_all_lag1,permutation_validacao,6.446813676877222,0.7468858370626479
+base_02,SVR,weather_main_lag1,permutation_validacao,-1.8603646958328757,0.8523025127054584
+base_02,SVR,volume_lag1,permutation_validacao,227.98787909979032,10.781269252832091
+base_02,SVR,volume_lag1_ausente,permutation_validacao,33.27034367024911,7.819356859118091
+base_02,SVR,volume_lag2,permutation_validacao,120.3912700587217,5.814239875705629
+base_02,SVR,volume_lag2_ausente,permutation_validacao,30.91397461906041,7.139473859674848
+base_02,SVR,volume_lag3,permutation_validacao,13.991343724056321,1.7613126452760828
+base_02,SVR,volume_lag3_ausente,permutation_validacao,19.750044626449494,9.473143805610281
+base_02,SVR,volume_lag6,permutation_validacao,40.300552345727,0.7750215632293923
+base_02,SVR,volume_lag6_ausente,permutation_validacao,21.05190958419676,6.065254691641987
+base_02,SVR,volume_lag12,permutation_validacao,56.75786139304328,7.088472600303349
+base_02,SVR,volume_lag12_ausente,permutation_validacao,0.4982435024214927,4.008308174360886
+base_02,SVR,volume_lag24,permutation_validacao,180.181722139125,6.240510874201047
+base_02,SVR,volume_lag24_ausente,permutation_validacao,8.96680794248696,9.623467125230158
+base_02,SVR,volume_lag48,permutation_validacao,53.58545874947578,4.592487142839209
+base_02,SVR,volume_lag48_ausente,permutation_validacao,23.71055223781974,11.284097087832007
+base_02,SVR,volume_lag168,permutation_validacao,288.49611455638825,14.015465987391487
+base_02,SVR,volume_lag168_ausente,permutation_validacao,0.0,0.0
+base_02,SVR,media_3h,permutation_validacao,108.63300759670068,5.487281911316156
+base_02,SVR,desvio_3h,permutation_validacao,32.705211734951796,6.1888236896104365
+base_02,SVR,observacoes_3h,permutation_validacao,73.40513373699031,8.98571111774791
+base_02,SVR,media_6h,permutation_validacao,18.19690555314234,0.6047287351623908
+base_02,SVR,desvio_6h,permutation_validacao,6.7020944038891725,1.6207844767810962
+base_02,SVR,observacoes_6h,permutation_validacao,36.02043860116189,6.793328862794103
+base_02,SVR,media_24h,permutation_validacao,5.800908286656257,1.074254565401466
+base_02,SVR,desvio_24h,permutation_validacao,16.092734797661933,2.656967135047183
+base_02,SVR,observacoes_24h,permutation_validacao,26.55324480795044,5.308450516094779
+base_02,SVR,media_168h,permutation_validacao,-0.4591749496852344,3.333811078967017
+base_02,SVR,desvio_168h,permutation_validacao,1.7457454761873616,0.4851254216063501
+base_02,SVR,observacoes_168h,permutation_validacao,0.7942246859382559,2.3627179466847026
+base_02,SVR,variacao_1h,permutation_validacao,185.63332824658815,11.838111442857887
+base_02,SVR,variacao_diaria,permutation_validacao,16.05786853276781,2.334293111015783
+base_02,Decision Tree,hora,permutation_validacao,3.505220883534131,2.1327085858510295
+base_02,Decision Tree,dia_semana,permutation_validacao,0.06224899598396405,0.9940512729528366
+base_02,Decision Tree,mes,permutation_validacao,0.0,0.0
+base_02,Decision Tree,fim_de_semana,permutation_validacao,0.0,0.0
+base_02,Decision Tree,hora_sin,permutation_validacao,3.0177854274240112,1.3103585216480167
+base_02,Decision Tree,hora_cos,permutation_validacao,472.96048381912374,21.424394904179692
+base_02,Decision Tree,semana_sin,permutation_validacao,14.137789813582458,2.895083391251612
+base_02,Decision Tree,semana_cos,permutation_validacao,3.1970102632753687,1.9006495761280864
+base_02,Decision Tree,ano_sin,permutation_validacao,0.0,0.0
+base_02,Decision Tree,ano_cos,permutation_validacao,0.0,0.0
+base_02,Decision Tree,temp_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,temp_lag1,permutation_validacao,-3.146866832408989,1.6324071651087677
+base_02,Decision Tree,rain_1h_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,rain_1h_lag1,permutation_validacao,0.0,0.0
+base_02,Decision Tree,snow_1h_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,snow_1h_lag1,permutation_validacao,0.0,0.0
+base_02,Decision Tree,clouds_all_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,clouds_all_lag1,permutation_validacao,-1.4463186077643588,1.5137650154675981
+base_02,Decision Tree,weather_main_lag1,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag1,permutation_validacao,762.7473160010098,17.30786026346691
+base_02,Decision Tree,volume_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag2,permutation_validacao,0.40610059284756517,0.13664781074565135
+base_02,Decision Tree,volume_lag2_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag3,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag3_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag6,permutation_validacao,-2.8850290049084983,1.9702139845517688
+base_02,Decision Tree,volume_lag6_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag12,permutation_validacao,12.290343260452667,4.09802531624649
+base_02,Decision Tree,volume_lag12_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag24,permutation_validacao,32.00449056568274,7.208389524072476
+base_02,Decision Tree,volume_lag24_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag48,permutation_validacao,-2.276346656467126,3.4690640210905967
+base_02,Decision Tree,volume_lag48_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,volume_lag168,permutation_validacao,208.66010359124664,24.245709072754675
+base_02,Decision Tree,volume_lag168_ausente,permutation_validacao,0.0,0.0
+base_02,Decision Tree,media_3h,permutation_validacao,65.56420695312583,17.402660447454675
+base_02,Decision Tree,desvio_3h,permutation_validacao,13.246201163734478,5.354946474135812
+base_02,Decision Tree,observacoes_3h,permutation_validacao,0.0,0.0
+base_02,Decision Tree,media_6h,permutation_validacao,0.9954930834449366,0.2851246469892798
+base_02,Decision Tree,desvio_6h,permutation_validacao,14.47241068250897,4.337270946324928
+base_02,Decision Tree,observacoes_6h,permutation_validacao,0.0,0.0
+base_02,Decision Tree,media_24h,permutation_validacao,3.536285618665166,1.7039092792103059
+base_02,Decision Tree,desvio_24h,permutation_validacao,10.835959944140049,6.598766651742758
+base_02,Decision Tree,observacoes_24h,permutation_validacao,0.0,0.0
+base_02,Decision Tree,media_168h,permutation_validacao,-2.3070727353859675,1.8517368176074214
+base_02,Decision Tree,desvio_168h,permutation_validacao,-0.21321650237310527,0.8803290623897805
+base_02,Decision Tree,observacoes_168h,permutation_validacao,0.0,0.0
+base_02,Decision Tree,variacao_1h,permutation_validacao,132.91244344238163,16.826146535423522
+base_02,Decision Tree,variacao_diaria,permutation_validacao,0.8461783642507044,1.7989709642634586
+base_02,Random Forest,hora,permutation_validacao,46.47791202175765,1.1396194506459711
+base_02,Random Forest,dia_semana,permutation_validacao,0.5707571144231167,0.6429364735462193
+base_02,Random Forest,mes,permutation_validacao,0.0,0.0
+base_02,Random Forest,fim_de_semana,permutation_validacao,-0.1265909217709217,0.0650295221265683
+base_02,Random Forest,hora_sin,permutation_validacao,7.600052074683703,1.5907923726751318
+base_02,Random Forest,hora_cos,permutation_validacao,218.04493072404605,14.610390911392471
+base_02,Random Forest,semana_sin,permutation_validacao,3.4900421648651445,1.9734237991210024
+base_02,Random Forest,semana_cos,permutation_validacao,1.5797937624061926,0.254970890441202
+base_02,Random Forest,ano_sin,permutation_validacao,0.0,0.0
+base_02,Random Forest,ano_cos,permutation_validacao,0.0,0.0
+base_02,Random Forest,temp_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,temp_lag1,permutation_validacao,-0.20160232294592598,0.12102866846327592
+base_02,Random Forest,rain_1h_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,rain_1h_lag1,permutation_validacao,0.0,0.0
+base_02,Random Forest,snow_1h_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,snow_1h_lag1,permutation_validacao,0.0,0.0
+base_02,Random Forest,clouds_all_lag1_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,clouds_all_lag1,permutation_validacao,-0.08443900946331458,0.4568873296189668
+base_02,Random Forest,weather_main_lag1,permutation_validacao,0.31656431825637316,0.1854707695851822
+base_02,Random Forest,volume_lag1,permutation_validacao,867.5953047497238,20.91180576869262
+base_02,Random Forest,volume_lag1_ausente,permutation_validacao,0.10811639414800804,0.02775637526407701
+base_02,Random Forest,volume_lag2,permutation_validacao,3.8462565281321965,0.5512948223307921
+base_02,Random Forest,volume_lag2_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,volume_lag3,permutation_validacao,10.041514593866765,2.325645760930054
+base_02,Random Forest,volume_lag3_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,volume_lag6,permutation_validacao,-1.378229722879117,1.3916653809017905
+base_02,Random Forest,volume_lag6_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,volume_lag12,permutation_validacao,3.3891970769625743,0.8393954694123794
+base_02,Random Forest,volume_lag12_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,volume_lag24,permutation_validacao,35.5359786123303,0.7556386226640405
+base_02,Random Forest,volume_lag24_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,volume_lag48,permutation_validacao,9.843954266232515,0.6792259319738435
+base_02,Random Forest,volume_lag48_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,volume_lag168,permutation_validacao,369.1398976080862,25.40720070271882
+base_02,Random Forest,volume_lag168_ausente,permutation_validacao,0.0,0.0
+base_02,Random Forest,media_3h,permutation_validacao,22.192574692086414,1.1653224188252402
+base_02,Random Forest,desvio_3h,permutation_validacao,16.453129522405806,3.448797399716424
+base_02,Random Forest,observacoes_3h,permutation_validacao,0.12228078982597405,0.034586230277917296
+base_02,Random Forest,media_6h,permutation_validacao,20.28912582276273,0.9069248580224133
+base_02,Random Forest,desvio_6h,permutation_validacao,4.446272533314442,2.2440947232840998
+base_02,Random Forest,observacoes_6h,permutation_validacao,0.0,0.0
+base_02,Random Forest,media_24h,permutation_validacao,9.778972156971824,1.4104170496201276
+base_02,Random Forest,desvio_24h,permutation_validacao,3.346062433356385,1.0807437758129124
+base_02,Random Forest,observacoes_24h,permutation_validacao,0.14704576639893693,0.07455404724349197
+base_02,Random Forest,media_168h,permutation_validacao,-0.21697233364594126,0.3929588580894126
+base_02,Random Forest,desvio_168h,permutation_validacao,-0.4640882459322218,0.07291245581995431
+base_02,Random Forest,observacoes_168h,permutation_validacao,-0.0705369694451008,0.10972211999092697
+base_02,Random Forest,variacao_1h,permutation_validacao,128.64293120592592,15.477232622056826
+base_02,Random Forest,variacao_diaria,permutation_validacao,3.3784571279207967,0.8740902433661405
