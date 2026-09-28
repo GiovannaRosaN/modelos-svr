@@ -1,0 +1,43 @@
+base,modelo,feature,importance,importance_std,metodo,n_avaliacoes,rank
+base_01,Random Forest,close_lag_1,8309.854417375373,331.57420802896297,permutation_delta_mae,365,1
+base_01,Random Forest,close_lag_2,3735.30828857787,236.55838483440985,permutation_delta_mae,365,2
+base_01,Random Forest,rolling_mean_14,347.67820119417394,55.525701058708464,permutation_delta_mae,365,3
+base_01,Random Forest,rolling_mean_7,181.08616708905362,37.21329574764063,permutation_delta_mae,365,4
+base_01,Random Forest,close_lag_3,115.01579515901771,22.858810632007124,permutation_delta_mae,365,5
+base_01,Random Forest,close_lag_30,23.378580774304556,2.516133334682693,permutation_delta_mae,365,6
+base_01,Random Forest,return_7d,15.091595380330455,6.8729069944395755,permutation_delta_mae,365,7
+base_01,Random Forest,rolling_mean_30,13.000127662056002,16.324246536618237,permutation_delta_mae,365,8
+base_01,Random Forest,open_close_change,11.657577961563357,2.7428117881872476,permutation_delta_mae,365,9
+base_01,Random Forest,return_1d,9.115444347587118,2.4731741534578866,permutation_delta_mae,365,10
+base_01,Random Forest,rolling_std_7,5.806472202963505,3.7329066230442036,permutation_delta_mae,365,11
+base_01,Random Forest,log_volume,5.306543327667759,2.9679038555106536,permutation_delta_mae,365,12
+base_01,Random Forest,log_volume_change_1d,4.293173173615651,4.63913642699414,permutation_delta_mae,365,13
+base_01,Random Forest,intraday_range,2.791762432570431,2.7947933892887846,permutation_delta_mae,365,14
+base_01,Random Forest,target_dow_cos,1.3977363558980869,1.5737740759772696,permutation_delta_mae,365,15
+base_01,Random Forest,imputado,0.0,0.0,permutation_delta_mae,365,16
+base_01,Random Forest,target_dow_sin,-1.6933703623721612,2.433276776099655,permutation_delta_mae,365,17
+base_01,Random Forest,close_lag_7,-9.872446266188309,6.433139661994586,permutation_delta_mae,365,18
+base_01,Random Forest,rolling_std_14,-13.10298477466099,18.946041917010174,permutation_delta_mae,365,19
+base_01,Random Forest,rolling_std_30,-32.71696923352961,16.839615801835663,permutation_delta_mae,365,20
+base_01,Random Forest,close_lag_14,-87.48853751885967,16.42471070905227,permutation_delta_mae,365,21
+base_01,SVR,close_lag_1,4499.372514395471,218.59020254046305,permutation_delta_mae,365,1
+base_01,SVR,close_lag_2,4460.027307977274,214.70054419566222,permutation_delta_mae,365,2
+base_01,SVR,rolling_mean_14,1601.1708458946337,120.44560637729597,permutation_delta_mae,365,3
+base_01,SVR,rolling_mean_7,1273.910980160525,97.29416425576147,permutation_delta_mae,365,4
+base_01,SVR,close_lag_7,538.1930912087022,64.26596832787297,permutation_delta_mae,365,5
+base_01,SVR,close_lag_3,462.8686350889093,50.01996427934511,permutation_delta_mae,365,6
+base_01,SVR,open_close_change,265.0056667067759,23.83000771261241,permutation_delta_mae,365,7
+base_01,SVR,return_7d,236.2714608574227,35.76249393022117,permutation_delta_mae,365,8
+base_01,SVR,intraday_range,119.16093303222026,13.38878603749701,permutation_delta_mae,365,9
+base_01,SVR,close_lag_14,108.71989826553784,20.75291393226839,permutation_delta_mae,365,10
+base_01,SVR,target_dow_sin,90.70603364083135,12.763738052678011,permutation_delta_mae,365,11
+base_01,SVR,rolling_std_14,71.24858193084947,34.149806661858555,permutation_delta_mae,365,12
+base_01,SVR,close_lag_30,55.13061538563975,21.89490786171482,permutation_delta_mae,365,13
+base_01,SVR,target_dow_cos,45.57890663011174,20.092128102074987,permutation_delta_mae,365,14
+base_01,SVR,rolling_std_7,40.94650012416164,23.019628615706072,permutation_delta_mae,365,15
+base_01,SVR,log_volume_change_1d,27.950755869319163,19.6972906129556,permutation_delta_mae,365,16
+base_01,SVR,rolling_std_30,15.929362788174057,31.976322564309545,permutation_delta_mae,365,17
+base_01,SVR,rolling_mean_30,13.261027896333507,17.481241651677735,permutation_delta_mae,365,18
+base_01,SVR,imputado,0.0,0.0,permutation_delta_mae,365,19
+base_01,SVR,log_volume,-2.8734569806970285,14.344480488335588,permutation_delta_mae,365,20
+base_01,SVR,return_1d,-18.301461454176955,24.481955955933444,permutation_delta_mae,365,21
