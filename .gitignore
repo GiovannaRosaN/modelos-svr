@@ -5,3 +5,4 @@ __pycache__/
 report/*.html
 report/*.pdf
 results/
+/data/processed/*.parquet
