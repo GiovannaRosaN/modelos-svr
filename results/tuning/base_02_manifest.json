@@ -1,0 +1,132 @@
+{
+  "base": "base_02",
+  "random_state": 67,
+  "frequencia": "h",
+  "horizonte": 1,
+  "treino_proporcao_grade": 0.8,
+  "teste_inicio": "2018-03-14 04:00:00",
+  "teste_fim": "2018-09-30 23:00:00",
+  "janela_ajuste_horas": 1344,
+  "refit_horas": 168,
+  "validacao_folds": [
+    [
+      18940,
+      19108
+    ],
+    [
+      19108,
+      19276
+    ]
+  ],
+  "parametros": {
+    "SVR": {
+      "C": 1000,
+      "epsilon": 50,
+      "gamma": 0.01
+    },
+    "Decision Tree": {
+      "max_depth": 10,
+      "min_samples_leaf": 5,
+      "min_samples_split": 10
+    },
+    "Random Forest": {
+      "n_estimators": 80,
+      "max_depth": 12,
+      "min_samples_leaf": 2,
+      "min_samples_split": 4,
+      "max_features": 0.8
+    },
+    "SARIMAX": {
+      "order": [
+        1,
+        0,
+        1
+      ],
+      "seasonal_order": [
+        1,
+        0,
+        0,
+        24
+      ]
+    },
+    "Holt-Winters": {
+      "trend": "add",
+      "damped_trend": true,
+      "seasonal_periods": 168,
+      "alpha": 0.4,
+      "beta": 0.02,
+      "gamma": 0.2
+    }
+  },
+  "feature_cols": [
+    "hora",
+    "dia_semana",
+    "mes",
+    "fim_de_semana",
+    "hora_sin",
+    "hora_cos",
+    "semana_sin",
+    "semana_cos",
+    "ano_sin",
+    "ano_cos",
+    "temp_lag1_ausente",
+    "temp_lag1",
+    "rain_1h_lag1_ausente",
+    "rain_1h_lag1",
+    "snow_1h_lag1_ausente",
+    "snow_1h_lag1",
+    "clouds_all_lag1_ausente",
+    "clouds_all_lag1",
+    "weather_main_lag1",
+    "volume_lag1",
+    "volume_lag1_ausente",
+    "volume_lag2",
+    "volume_lag2_ausente",
+    "volume_lag3",
+    "volume_lag3_ausente",
+    "volume_lag6",
+    "volume_lag6_ausente",
+    "volume_lag12",
+    "volume_lag12_ausente",
+    "volume_lag24",
+    "volume_lag24_ausente",
+    "volume_lag48",
+    "volume_lag48_ausente",
+    "volume_lag168",
+    "volume_lag168_ausente",
+    "media_3h",
+    "desvio_3h",
+    "observacoes_3h",
+    "media_6h",
+    "desvio_6h",
+    "observacoes_6h",
+    "media_24h",
+    "desvio_24h",
+    "observacoes_24h",
+    "media_168h",
+    "desvio_168h",
+    "observacoes_168h",
+    "variacao_1h",
+    "variacao_diaria"
+  ],
+  "sarimax_exog": [
+    "hora_sin",
+    "hora_cos",
+    "semana_sin",
+    "semana_cos",
+    "fim_de_semana",
+    "temp_lag1",
+    "rain_1h_lag1",
+    "snow_1h_lag1",
+    "clouds_all_lag1"
+  ],
+  "sha256_entrada": "3c105848c040bbbcf3deb07da26a5ab3a1487543c342dc0501ba97c63679bca4",
+  "versoes": {
+    "python": "3.12.5",
+    "pandas": "2.2.2",
+    "sklearn": "1.6.1",
+    "statsmodels": "0.14.6"
+  },
+  "protocolo": "one-step, janela móvel, reajuste semanal, estados e lags atualizados a cada hora",
+  "avaliacao": "somente alvos observados nas mesmas datas dos cinco modelos"
+}
