@@ -1,0 +1,5 @@
+base,modelo,MAE,horas_avaliadas,tempo_segundos,estrategia,parametros,ranking
+base_03,Random Forest,9.925549679624842,6906,91.28321900000446,walk_forward_1_passo_origem_movel,"{""n_estimators"": 150, ""max_depth"": 12, ""min_samples_split"": 4, ""min_samples_leaf"": 2, ""max_features"": 0.8}",1
+base_03,SARIMAX,9.945105338113317,6906,290.96078139997553,walk_forward_1_passo_origem_movel,"{""order"": [1, 0, 0], ""seasonal_order"": [0, 0, 0, 24]}",2
+base_03,Holt-Winters,10.371099547815302,6906,32.44727440000861,walk_forward_1_passo_origem_movel,"{""trend"": ""add"", ""damped_trend"": true, ""seasonal"": ""add""}",3
+base_03,SVR,13.7164218399134,6906,17.080086700007087,walk_forward_1_passo_origem_movel,"{""C"": 1.0, ""epsilon"": 0.1, ""gamma"": ""scale""}",4
