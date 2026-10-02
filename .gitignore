@@ -4,4 +4,3 @@ __pycache__/
 *.pyc
 report/*.html
 report/*.pdf
-/data/processed/*.parquet
