@@ -1,0 +1,100 @@
+base,modelo,feature,importancia,desvio,metodo
+base_03,Random Forest,PM2.5_lag_1,72.30525258450766,1.8565710609603054,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_lag_2,2.7904422521444183,0.5811077589849578,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_lag_3,0.01715018309649281,0.07164920913940107,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_lag_6,0.2065864023976122,0.09100392881731043,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_lag_12,0.05040282294847209,0.07439637682406766,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_lag_24,-0.0005810669206496755,0.036141904772241815,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_lag_48,-0.019989107543809937,0.030605957335157537,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_lag_168,-0.0027645567017724913,0.023263806446990904,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_media_6,0.8747195986597944,0.16346636584946592,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_std_6,0.062390715736065874,0.047530180196684604,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_validos_6,-0.015495012204904058,0.0061495985552130214,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_media_24,0.5598771682846838,0.31081547215412497,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_std_24,-0.016702254930905623,0.027538385121766717,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_validos_24,0.01766249275508258,0.012023743741486749,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_media_168,0.07119417069514249,0.04990453360735245,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_std_168,0.14832913950118395,0.09315545852159701,permutation_MAE_validacao
+base_03,Random Forest,PM2.5_validos_168,0.0037622190782883535,0.013331685641663817,permutation_MAE_validacao
+base_03,Random Forest,PM10_lag_1,2.3759826107449995,0.20087423131691584,permutation_MAE_validacao
+base_03,Random Forest,PM10_lag_24,-0.029430447786936754,0.0197634460731836,permutation_MAE_validacao
+base_03,Random Forest,SO2_lag_1,0.09162964669485944,0.024605815457018152,permutation_MAE_validacao
+base_03,Random Forest,SO2_lag_24,0.0012037515078020533,0.008587615417424093,permutation_MAE_validacao
+base_03,Random Forest,NO2_lag_1,0.7472088024967732,0.09718024685789471,permutation_MAE_validacao
+base_03,Random Forest,NO2_lag_24,-0.06312940211370517,0.020662202014708485,permutation_MAE_validacao
+base_03,Random Forest,CO_lag_1,0.1912917439603646,0.07162505693255249,permutation_MAE_validacao
+base_03,Random Forest,CO_lag_24,-0.024161049380053257,0.08754802283786288,permutation_MAE_validacao
+base_03,Random Forest,O3_lag_1,0.35512847417362325,0.4200300616218049,permutation_MAE_validacao
+base_03,Random Forest,O3_lag_24,-0.003609633901732323,0.028142113594506843,permutation_MAE_validacao
+base_03,Random Forest,TEMP_lag_1,0.04771188525563659,0.04829796823686424,permutation_MAE_validacao
+base_03,Random Forest,TEMP_lag_24,0.00969100731455228,0.06289171742541014,permutation_MAE_validacao
+base_03,Random Forest,PRES_lag_1,0.07472279921756453,0.019705742654392108,permutation_MAE_validacao
+base_03,Random Forest,PRES_lag_24,-0.05306212862759736,0.06170616008981658,permutation_MAE_validacao
+base_03,Random Forest,DEWP_lag_1,0.1358548148878011,0.1400091621393214,permutation_MAE_validacao
+base_03,Random Forest,DEWP_lag_24,0.01286957132616635,0.015404702854313664,permutation_MAE_validacao
+base_03,Random Forest,RAIN_lag_1,-0.014774547718484854,0.048121252293433815,permutation_MAE_validacao
+base_03,Random Forest,RAIN_lag_24,0.0010518175130840746,0.0021112723830956186,permutation_MAE_validacao
+base_03,Random Forest,WSPM_lag_1,0.9307402825389488,0.3772030632410634,permutation_MAE_validacao
+base_03,Random Forest,WSPM_lag_24,-0.008381972351165601,0.022386912265660728,permutation_MAE_validacao
+base_03,Random Forest,vento_sin_lag1,-0.02967124796323404,0.021037709662216554,permutation_MAE_validacao
+base_03,Random Forest,vento_cos_lag1,0.14447875969289647,0.09505416177153514,permutation_MAE_validacao
+base_03,Random Forest,hora_sin,0.14795726358430664,0.027654632112104324,permutation_MAE_validacao
+base_03,Random Forest,hora_cos,-0.0008603195280997511,0.01208272370007015,permutation_MAE_validacao
+base_03,Random Forest,semana_sin,0.0019740507759813397,0.004607977584017148,permutation_MAE_validacao
+base_03,Random Forest,semana_cos,-0.002928039285419004,0.012311647770139303,permutation_MAE_validacao
+base_03,Random Forest,ano_sin,0.008293626938020182,0.028567523435079605,permutation_MAE_validacao
+base_03,Random Forest,ano_cos,0.04805965401151937,0.029516691579514327,permutation_MAE_validacao
+base_03,SVR,PM2.5_lag_1,42.9444763106258,1.516279257975091,permutation_MAE_validacao
+base_03,SVR,PM2.5_lag_2,2.2796535856840094,0.2908745046028048,permutation_MAE_validacao
+base_03,SVR,PM2.5_lag_3,1.4410269637577435,0.2979889341553012,permutation_MAE_validacao
+base_03,SVR,PM2.5_lag_6,2.0651375701810415,0.5290092207408224,permutation_MAE_validacao
+base_03,SVR,PM2.5_lag_12,1.9050855299771954,0.4343453697195341,permutation_MAE_validacao
+base_03,SVR,PM2.5_lag_24,2.4342642266357712,0.2958051445568175,permutation_MAE_validacao
+base_03,SVR,PM2.5_lag_48,0.505329979799334,0.13999544520060267,permutation_MAE_validacao
+base_03,SVR,PM2.5_lag_168,-0.37193372019537774,0.19114231834878517,permutation_MAE_validacao
+base_03,SVR,PM2.5_media_6,5.045149386887061,0.650638190955483,permutation_MAE_validacao
+base_03,SVR,PM2.5_std_6,0.616858508584027,0.11011005701064289,permutation_MAE_validacao
+base_03,SVR,PM2.5_validos_6,0.5886948101191976,0.1883411015675075,permutation_MAE_validacao
+base_03,SVR,PM2.5_media_24,4.151745292263125,0.4380824199919059,permutation_MAE_validacao
+base_03,SVR,PM2.5_std_24,1.1419184942131586,0.22096312237808544,permutation_MAE_validacao
+base_03,SVR,PM2.5_validos_24,0.2812168274033603,0.35514251463210195,permutation_MAE_validacao
+base_03,SVR,PM2.5_media_168,1.070348526599156,0.2796836633366634,permutation_MAE_validacao
+base_03,SVR,PM2.5_std_168,0.6505249743110191,0.1430605013626426,permutation_MAE_validacao
+base_03,SVR,PM2.5_validos_168,0.0023481520791868602,0.054722074308271106,permutation_MAE_validacao
+base_03,SVR,PM10_lag_1,7.774526299208498,0.6263614806818768,permutation_MAE_validacao
+base_03,SVR,PM10_lag_24,1.1850088304969737,0.1166359107578889,permutation_MAE_validacao
+base_03,SVR,SO2_lag_1,0.3175799594024696,0.09330880320615452,permutation_MAE_validacao
+base_03,SVR,SO2_lag_24,0.320018593848512,0.11711919422538321,permutation_MAE_validacao
+base_03,SVR,NO2_lag_1,2.2684395025950104,0.16594518474375713,permutation_MAE_validacao
+base_03,SVR,NO2_lag_24,0.8054467572246423,0.18826961401726738,permutation_MAE_validacao
+base_03,SVR,CO_lag_1,2.8499431069872907,0.5162289440498181,permutation_MAE_validacao
+base_03,SVR,CO_lag_24,0.1905033986840486,0.23452348780219642,permutation_MAE_validacao
+base_03,SVR,O3_lag_1,0.1403694138105706,0.10388293550860928,permutation_MAE_validacao
+base_03,SVR,O3_lag_24,0.146100622791446,0.1269885692639847,permutation_MAE_validacao
+base_03,SVR,TEMP_lag_1,0.3788559247256259,0.14697154935547524,permutation_MAE_validacao
+base_03,SVR,TEMP_lag_24,0.11079897490593993,0.03180056129979365,permutation_MAE_validacao
+base_03,SVR,PRES_lag_1,0.29346214132760623,0.08738801443582309,permutation_MAE_validacao
+base_03,SVR,PRES_lag_24,0.5173560877188024,0.08812160491790919,permutation_MAE_validacao
+base_03,SVR,DEWP_lag_1,3.3500158117170997,0.2557032373384268,permutation_MAE_validacao
+base_03,SVR,DEWP_lag_24,0.47420840087724087,0.1332424355093422,permutation_MAE_validacao
+base_03,SVR,RAIN_lag_1,0.013283616419048627,0.14224124594814458,permutation_MAE_validacao
+base_03,SVR,RAIN_lag_24,0.016311058476468788,0.012790933222434494,permutation_MAE_validacao
+base_03,SVR,WSPM_lag_1,1.108166476937538,0.1775197392815731,permutation_MAE_validacao
+base_03,SVR,WSPM_lag_24,0.6162289667649901,0.1271104725126469,permutation_MAE_validacao
+base_03,SVR,vento_sin_lag1,-0.18170016462850286,0.05578170148723312,permutation_MAE_validacao
+base_03,SVR,vento_cos_lag1,0.43694418621174336,0.1058745250453799,permutation_MAE_validacao
+base_03,SVR,hora_sin,0.5149417663008145,0.12031311952847844,permutation_MAE_validacao
+base_03,SVR,hora_cos,0.019742951102789875,0.0636374744769698,permutation_MAE_validacao
+base_03,SVR,semana_sin,-0.20212530275402543,0.06382911568034352,permutation_MAE_validacao
+base_03,SVR,semana_cos,-0.1419527981833461,0.06663210269416632,permutation_MAE_validacao
+base_03,SVR,ano_sin,0.31303424267504243,0.08943165342334333,permutation_MAE_validacao
+base_03,SVR,ano_cos,0.08354837992187072,0.05638937981393901,permutation_MAE_validacao
+base_03,SARIMAX,TEMP_lag_1,-0.06660247112582558,,coeficiente_padronizado
+base_03,SARIMAX,PRES_lag_1,-0.033662604156381074,,coeficiente_padronizado
+base_03,SARIMAX,WSPM_lag_1,-0.007628500424684507,,coeficiente_padronizado
+base_03,SARIMAX,CO_lag_1,0.07873116851597357,,coeficiente_padronizado
+base_03,SARIMAX,PM10_lag_1,0.09512200640656585,,coeficiente_padronizado
+base_03,SARIMAX,hora_sin,-0.01733506960564943,,coeficiente_padronizado
+base_03,SARIMAX,hora_cos,0.027436873289110788,,coeficiente_padronizado
+base_03,SARIMAX,ano_sin,-0.02410874174429479,,coeficiente_padronizado
+base_03,SARIMAX,ano_cos,-0.005575000147569372,,coeficiente_padronizado
