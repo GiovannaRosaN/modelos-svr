@@ -1,0 +1,6 @@
+base,referencia,mae,fonte,melhor_modelo,mae_melhor,ganho_sobre_referencia_%
+base_01,Persistência (t+1 = t),1317.3316970642302,calculado neste notebook,Holt-Winters,1317.7137005250845,-0.028998274444136385
+base_02,Sazonal ingênuo (168 h),293.6480785296575,results/metrics/base_02_baseline.csv,Random Forest,134.74157074196506,54.11460840587227
+base_03,Persistência (t+1 = t),10.339165937591135,calculado neste notebook,Random Forest,9.925549679624842,4.000479927132872
+base_04,Persistência (t+1 = t),1.884335,saída de notebooks/04_base_04.ipynb,SVR,1.6468,12.605773389551223
+base_05,Persistência (t+1 = t),16.012623299319728,calculado neste notebook,SARIMAX,15.588360578840959,2.6495516227924565

@@ -1,0 +1,5 @@
+modelo,base_01,base_02,base_03,base_04,base_05,vitorias,posicao_media,pior_posicao
+SARIMAX,2,4,2,3,1,1,2.4,4
+Holt-Winters,1,3,3,4,2,1,2.6,4
+Random Forest,3,1,1,2,3,2,2.0,3
+SVR,4,2,4,1,4,1,3.0,4
