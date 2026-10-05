@@ -1,7 +1,10 @@
-"""Auditoria independente e rápida dos artefatos da Base 02.
+"""Auditoria independente do código, dos dados e dos artefatos da Base 02.
 
 Execute da raiz do repositório: python -m unittest discover -s tests -v
+Só código/dados: python -m unittest discover -s tests -v -k Base02Protocol -k Base02Data
 A execução integral do notebook é uma etapa separada do plano de testes.
+As classes Base02Protocol e Base02Data não dependem de previsões antigas.
+Base02Exports exige evidência nova, com janela expansiva e código atualizado.
 """
 
 from __future__ import annotations
@@ -11,7 +14,9 @@ import hashlib
 import json
 import math
 import unittest
+import warnings
 from pathlib import Path
+from time import perf_counter
 from unittest.mock import patch
 
 import numpy as np
@@ -30,7 +35,7 @@ EXPECTED_MISSING_TARGETS = 1_012
 TRAIN_RATIO = 0.80
 VALIDATION_HOURS = 168
 N_FOLDS = 2
-TRAIN_WINDOW = 1_344
+TRAIN_START_POS = 0
 REFIT_HOURS = 168
 HOUR = pd.Timedelta(hours=1)
 
@@ -61,6 +66,105 @@ def ingestion_code():
             if "raw = pd.read_csv(DATA_PATH" in source:
                 return compile(source, str(NOTEBOOK), "exec")
     raise AssertionError("Célula de auditoria de entrada não encontrada")
+
+
+class Base02Protocol(unittest.TestCase):
+    """Contrato de treino verificado sem executar buscas ou ler resultados."""
+
+    def test_p01_full_history_configuration(self):
+        """P01: nenhum limite móvel; corte e reajuste semanal preservados."""
+        assignments = {}
+        for cell in notebook_cells():
+            if cell["cell_type"] != "code":
+                continue
+            for node in ast.parse("".join(cell["source"])).body:
+                if isinstance(node, ast.Assign):
+                    for target in node.targets:
+                        if isinstance(target, ast.Name):
+                            assignments[target.id] = node.value
+        expected = {"TRAIN_START_POS": TRAIN_START_POS, "TRAIN_RATIO": TRAIN_RATIO,
+                    "REFIT_HOURS": REFIT_HOURS, "VALIDATION_HOURS": VALIDATION_HOURS,
+                    "N_FOLDS": N_FOLDS, "RANDOM_STATE": 67, "HORIZON": 1}
+        for name, value in expected.items():
+            with self.subTest(configuracao=name):
+                self.assertIn(name, assignments)
+                self.assertEqual(ast.literal_eval(assignments[name]), value)
+        self.assertNotIn("TRAIN_WINDOW", assignments,
+                         "O limite de oito semanas não pertence ao protocolo expansivo.")
+
+    def test_p02_all_models_receive_the_entire_available_prefix(self):
+        """P02: cinco modelos partem da hora zero, incluindo as primeiras 168 h."""
+        dates = pd.date_range("2020-01-01", periods=2_400, freq="h")
+        target = pd.Series(np.arange(2_400, dtype=float), index=dates)
+        target.iloc[10] = np.nan  # faltante preservado no prefixo
+        features = pd.DataFrame({"exog": np.arange(2_400, dtype=float)}, index=dates)
+        received = []
+
+        def tabular(name, params, ytr, Xtr, Xfuture):
+            received.append((name, ytr.copy(), Xtr.copy(), Xfuture.copy()))
+            return np.ones(len(Xfuture)), None, {}
+
+        def sarimax(params, ytr, yfuture, Xtr, Xfuture):
+            received.append(("SARIMAX", ytr.copy(), Xtr.copy(), Xfuture.copy()))
+            pd.testing.assert_index_equal(yfuture.index, Xfuture.index)
+            return np.ones(len(yfuture)), None, {}
+
+        def holt_winters(params, start, first_train_hour, yfuture):
+            self.assertEqual(first_train_hour, TRAIN_START_POS)
+            received.append(("Holt-Winters", target.iloc[first_train_hour:start].copy(),
+                             features.iloc[first_train_hour:start].copy(),
+                             features.loc[yfuture.index].copy()))
+            return np.ones(len(yfuture)), None, {}
+
+        namespace = {"np": np, "y": target, "X": features,
+                     "TRAIN_START_POS": TRAIN_START_POS, "warnings": warnings,
+                     "perf_counter": perf_counter, "fit_logs": [],
+                     "forecast_tabular": tabular, "forecast_sarimax": sarimax,
+                     "forecast_holt_winters": holt_winters}
+        forecast = notebook_function("forecast_block", namespace)
+        for name in sorted(OFFICIAL_MODELS | OPTIONAL_MODELS):
+            for start in (400, 2_000):
+                with self.subTest(modelo=name, origem=start):
+                    pred = forecast(name, {}, start, start + 3, "teste_unitario")
+                    recorded_name, ytr, Xtr, Xfuture = received[-1]
+                    self.assertEqual(recorded_name, name)
+                    pd.testing.assert_series_equal(ytr, target.iloc[:start])
+                    pd.testing.assert_frame_equal(Xtr, features.iloc[:start])
+                    pd.testing.assert_frame_equal(Xfuture, features.iloc[start:start+3])
+                    self.assertEqual(len(pred), 3)
+                    log = namespace["fit_logs"][-1]
+                    self.assertEqual(log["treino_inicio"], dates[0])
+                    self.assertEqual(log["treino_fim"], dates[start-1])
+                    self.assertEqual(log["n_treino_horas"], start)
+                    self.assertEqual(log["n_treino_observado"], start - 1)
+                    self.assertEqual(log["janela_tipo"], "expansiva")
+
+    def test_p03_manifest_source_describes_the_expanding_protocol(self):
+        """P03: manifesto futuro deve distinguir as saídas novas das móveis antigas."""
+        manifest_node = None
+        for cell in notebook_cells():
+            if cell["cell_type"] != "code":
+                continue
+            for node in ast.parse("".join(cell["source"])).body:
+                if isinstance(node, ast.Assign) and any(
+                    isinstance(target, ast.Name) and target.id == "manifest"
+                    for target in node.targets
+                ):
+                    manifest_node = node.value
+        self.assertIsInstance(manifest_node, ast.Dict)
+        fields = {ast.literal_eval(key): value
+                  for key, value in zip(manifest_node.keys, manifest_node.values)}
+        expected = {"janela_tipo": "expansiva", "janela_ajuste_horas": None,
+                    "treino_inicio_posicao": TRAIN_START_POS}
+        for name, value in expected.items():
+            with self.subTest(campo=name):
+                self.assertIn(name, fields)
+                expression = ast.fix_missing_locations(ast.Expression(fields[name]))
+                actual = eval(compile(expression, str(NOTEBOOK), "eval"),
+                              {"TRAIN_START_POS": TRAIN_START_POS})
+                self.assertEqual(actual, value)
+        self.assertIn("one-step", ast.literal_eval(fields["protocolo"]))
+        self.assertIn("janela expansiva", ast.literal_eval(fields["protocolo"]))
 
 
 class Base02Data(unittest.TestCase):
@@ -95,21 +199,17 @@ class Base02Data(unittest.TestCase):
         self.assertEqual(self.raw.date_time.iloc[0], pd.Timestamp("2016-01-01 00:00:00"))
         self.assertEqual(self.raw.date_time.iloc[-1], pd.Timestamp("2018-09-30 23:00:00"))
 
-    def test_d02_processed_grid_preserves_target(self):
-        """D02: o parquet de features não preenche nem comprime o alvo."""
-        processed = pd.read_parquet(ROOT / "data/processed/base_02.parquet")
-        self.assertEqual(len(processed), len(self.raw))
-        self.assertEqual(processed.index.name, "date_time")
-        pd.testing.assert_index_equal(processed.index, pd.DatetimeIndex(self.raw.date_time,
-                                                                        name="date_time"))
-        pd.testing.assert_series_equal(processed.traffic_volume, self.y)
-
     def test_d01_d02_reject_invalid_synthetic_inputs(self):
         """Casos negativos: duplicata, hora ausente e alvo negativo falham na carga."""
         base = pd.DataFrame({
             "date_time": pd.date_range("2020-01-01", periods=5, freq="h"),
             "traffic_volume": [1.0, 2.0, 3.0, 4.0, 5.0],
             "traffic_volume_original": [1.0, 2.0, 3.0, 4.0, 5.0],
+            "temp": [273.0] * 5,
+            "rain_1h": [0.0] * 5,
+            "snow_1h": [0.0] * 5,
+            "clouds_all": [0.0] * 5,
+            "weather_main": ["Clear"] * 5,
         })
         duplicate = base.copy()
         duplicate.loc[2, "date_time"] = duplicate.loc[1, "date_time"]
@@ -138,7 +238,7 @@ class Base02Data(unittest.TestCase):
         self.assertEqual(folds[-1][1], self.split)
         self.assertEqual(folds[0][1], folds[1][0])
         for start, stop in folds:
-            self.assertGreaterEqual(start - TRAIN_WINDOW, 0)
+            self.assertGreater(start, TRAIN_START_POS)
             self.assertLess(start, stop)
             self.assertLessEqual(stop, self.split)
             self.assertEqual(stop - start, VALIDATION_HOURS)
@@ -224,6 +324,27 @@ class Base02Data(unittest.TestCase):
 class Base02Exports(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        manifest_path = RESULTS / "tuning/base_02_manifest.json"
+        if not manifest_path.is_file():
+            raise AssertionError("Execute novamente o notebook: falta o manifesto expansivo.")
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if not (manifest.get("janela_tipo") == "expansiva"
+                and manifest.get("janela_ajuste_horas", "ausente") is None
+                and manifest.get("treino_inicio_posicao") == TRAIN_START_POS):
+            raise AssertionError(
+                "Resultados incompatíveis com o código atual: ainda não há evidência "
+                "de execução com todo o histórico (janela expansiva desde a posição 0). "
+                "Execute novamente o notebook antes de auditar as saídas.")
+        executed_path = RESULTS / "test_runs/base_02_execucao_teste.ipynb"
+        if not executed_path.is_file():
+            raise AssertionError("Falta a evidência executada do notebook expansivo.")
+        executed = json.loads(executed_path.read_text(encoding="utf-8"))
+        source_codes = ["".join(c["source"]).strip() for c in notebook_cells()
+                        if c["cell_type"] == "code"]
+        executed_codes = ["".join(c["source"]).strip() for c in executed["cells"]
+                          if c["cell_type"] == "code"]
+        if source_codes != executed_codes:
+            raise AssertionError("A evidência de execução não corresponde ao código expansivo atual.")
         cls.raw = pd.read_csv(RAW, parse_dates=["date_time"])
         cls.y = cls.raw.set_index("date_time").traffic_volume.astype(float)
         cls.test_start = int(len(cls.y) * TRAIN_RATIO)
@@ -232,9 +353,25 @@ class Base02Exports(unittest.TestCase):
                               parse_dates=["data_origem", "data_prevista"])
         cls.metrics = pd.read_csv(RESULTS / "metrics/base_02_metrics.csv")
 
+    def test_d02_processed_grid_preserves_target(self):
+        """D02: o parquet de features não preenche nem comprime o alvo."""
+        processed = pd.read_parquet(ROOT / "data/processed/base_02.parquet")
+        self.assertEqual(len(processed), len(self.raw))
+        self.assertEqual(processed.index.name, "date_time")
+        pd.testing.assert_index_equal(processed.index, pd.DatetimeIndex(self.raw.date_time,
+                                                                        name="date_time"))
+        pd.testing.assert_series_equal(processed.traffic_volume, self.y)
+
     def test_e01_executed_notebook_without_errors(self):
-        """E01/M02: execução integral concluiu inclusive verificações recursivas."""
-        codes = [cell for cell in notebook_cells() if cell["cell_type"] == "code"]
+        """E01/M02: a evidência executada corresponde ao código atual do notebook."""
+        source_codes = [cell for cell in notebook_cells() if cell["cell_type"] == "code"]
+        executed_path = RESULTS / "test_runs/base_02_execucao_teste.ipynb"
+        self.assertTrue(executed_path.is_file(), "Execute o notebook antes de auditar as saídas.")
+        executed = json.loads(executed_path.read_text(encoding="utf-8"))
+        codes = [cell for cell in executed["cells"] if cell["cell_type"] == "code"]
+        self.assertEqual(["".join(c["source"]).strip() for c in source_codes],
+                         ["".join(c["source"]).strip() for c in codes],
+                         "A evidência de execução está desatualizada em relação ao código.")
         self.assertTrue(codes)
         self.assertTrue(all(cell.get("execution_count") is not None for cell in codes))
         errors = [(i, output.get("ename"), output.get("evalue"))
@@ -309,6 +446,12 @@ class Base02Exports(unittest.TestCase):
         expected_ranking = self.metrics.mae.rank(method="min").astype(int)
         pd.testing.assert_series_equal(self.metrics.ranking, expected_ranking, check_names=False)
         self.assertTrue(self.metrics.mae.is_monotonic_increasing)
+        official = self.metrics.modelo.isin(OFFICIAL_MODELS)
+        self.assertTrue(self.metrics.loc[~official, "ranking_oficial"].isna().all())
+        np.testing.assert_array_equal(
+            self.metrics.loc[official, "ranking_oficial"].to_numpy(),
+            self.metrics.loc[official, "mae"].rank(method="min").to_numpy())
+        self.assertTrue(self.metrics.loc[official, "escopo"].eq("oficial").all())
 
     def test_o03_seasonal_baseline_on_common_dates(self):
         """O03: ingênuo de 168 h e modelos medidos no mesmo subconjunto."""
@@ -333,7 +476,7 @@ class Base02Exports(unittest.TestCase):
                                                                "mae_mesmas_datas"]))
 
     def test_t02_fit_log_windows_and_weekly_test_refits(self):
-        """T02/M03: todos os ajustes precedem suas previsões e usam janela limitada."""
+        """T02/M03: treino cresce desde hora zero; reajustes continuam semanais."""
         logs = pd.read_csv(RESULTS / "tuning/base_02_fit_log.csv",
                            parse_dates=["treino_inicio", "treino_fim", "previsao_inicio", "previsao_fim"])
         self.assertTrue(set(self.pred.modelo) <= set(logs.modelo))
@@ -341,8 +484,15 @@ class Base02Exports(unittest.TestCase):
         self.assertTrue(logs.treino_fim.lt(logs.previsao_inicio).all())
         self.assertTrue(logs.previsao_inicio.le(logs.previsao_fim).all())
         train_hours = (logs.treino_fim - logs.treino_inicio) / HOUR + 1
-        self.assertTrue(train_hours.between(2 * 168, TRAIN_WINDOW).all())
-        self.assertTrue(logs.n_treino_observado.le(train_hours).all())
+        self.assertTrue(logs.treino_inicio.eq(self.y.index[TRAIN_START_POS]).all())
+        self.assertTrue(logs.janela_tipo.eq("expansiva").all())
+        self.assertTrue((logs.previsao_inicio - logs.treino_fim).eq(HOUR).all())
+        self.assertTrue(logs.n_treino_horas.eq(train_hours).all())
+        for row in logs.itertuples():
+            start = self.y.index.get_loc(row.previsao_inicio)
+            self.assertEqual(int(row.n_treino_horas), start - TRAIN_START_POS)
+            self.assertEqual(int(row.n_treino_observado),
+                             int(self.y.iloc[TRAIN_START_POS:start].notna().sum()))
         self.assertTrue(logs.n_treino_observado.gt(0).all())
         non_test = logs.loc[logs.etapa.ne("teste")]
         self.assertTrue(non_test.previsao_fim.lt(self.expected_dates[0]).all())
@@ -353,6 +503,8 @@ class Base02Exports(unittest.TestCase):
             expected_ends = [self.expected_dates[min((i+1)*REFIT_HOURS, len(self.expected_dates))-1]
                              for i in range(len(expected_starts))]
             self.assertEqual(list(test_logs.previsao_fim), expected_ends, name)
+            self.assertTrue(test_logs.n_treino_horas.is_monotonic_increasing, name)
+            self.assertEqual(int(test_logs.n_treino_horas.iloc[0]), self.test_start, name)
         sar = logs.loc[logs.modelo.eq("SARIMAX") & logs.etapa.eq("teste")]
         self.assertTrue(sar.convergiu.notna().all())
         self.assertIn("avisos", logs)
@@ -365,7 +517,11 @@ class Base02Exports(unittest.TestCase):
         self.assertEqual(manifest["horizonte"], 1)
         self.assertEqual(manifest["frequencia"], "h")
         self.assertEqual(manifest["treino_proporcao_grade"], TRAIN_RATIO)
-        self.assertEqual(manifest["janela_ajuste_horas"], TRAIN_WINDOW)
+        self.assertEqual(manifest["janela_tipo"], "expansiva")
+        self.assertIsNone(manifest["janela_ajuste_horas"])
+        self.assertEqual(manifest["treino_inicio_posicao"], TRAIN_START_POS)
+        self.assertIn("janela expansiva", manifest["protocolo"])
+        self.assertIn("one-step", manifest["protocolo"])
         self.assertEqual(manifest["refit_horas"], REFIT_HOURS)
         self.assertEqual(pd.Timestamp(manifest["teste_inicio"]), self.expected_dates[0])
         self.assertEqual(pd.Timestamp(manifest["teste_fim"]), self.expected_dates[-1])

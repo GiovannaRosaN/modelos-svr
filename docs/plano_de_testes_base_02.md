@@ -2,21 +2,25 @@
 
 Este documento **planeja** os testes do notebook `notebooks/02_base_02.ipynb`; não afirma que todos já estejam automatizados. O mesmo contrato de saída pode ser reaproveitado nas outras quatro bases e no notebook `06_comparacao_geral.ipynb`.
 
+O notebook da Base 02 segue as 16 etapas da Pipeline 01, adaptadas à grade horária. A suíte compara o código atual com a evidência executada em `results/test_runs/base_02_execucao_teste.ipynb`, permitindo manter o notebook fonte sem saídas embutidas. O CSV de métricas conserva `ranking` para a comparação dos cinco experimentos e acrescenta `ranking_oficial` (vazio para Decision Tree) e `escopo` para a consolidação dos quatro modelos exigidos.
+
 ## Objetivo e referência atual
 
 Garantir que os **quatro modelos obrigatórios do Grupo 2** (SARIMAX, Holt-Winters, Random Forest e SVR) sejam comparados sem vazamento temporal, no mesmo horizonte de **uma hora**, com treino e validação anteriores ao teste e métricas calculadas nas mesmas horas observadas. A Decision Tree permanece como experimento adicional solicitado pelo grupo; seus resultados devem ser identificados como extras e não alterar o ranking oficial exigido pela atividade.
 
-| Item | Referência da execução atual |
+| Item | Contrato atual |
 | --- | --- |
 | Entrada | 24.096 horas de 2016-01-01 a 2018-09-30; 1.012 alvos ausentes |
 | Recorte | 80% desenvolvimento / 20% teste sobre a grade horária |
 | Teste | 4.820 horas de 2018-03-14 04:00 a 2018-09-30 23:00; 4.805 alvos observados |
 | Validação | Dois folds consecutivos de 168 horas antes do teste |
-| Previsão | `data_prevista = data_origem + 1 hora`; janela de ajuste de 1.344 horas; reajuste a cada 168 horas |
+| Previsão | `data_prevista = data_origem + 1 hora`; janela expansiva desde a primeira hora, incluindo todo o histórico anterior à origem; reajuste a cada 168 horas |
 | Aleatoriedade | `random_state = 67` nos modelos que a utilizam |
 | Registro de entrada | SHA-256 e versões em `results/tuning/base_02_manifest.json` |
 
-Esses números são uma **fotografia da versão atual dos dados**, não uma regra para bases futuras. Uma mudança intencional na entrada exige atualizar a referência e documentar o motivo. O tempo de execução e a posição exata entre Random Forest e Holt-Winters não são critérios de aprovação: seus MAEs atuais são próximos (185,62 e 186,83 veículos/h).
+Esses números são uma **fotografia da versão atual dos dados**, não uma regra para bases futuras. Uma mudança intencional na entrada exige atualizar a referência e documentar o motivo. O tempo de execução, os MAEs antigos e a posição exata entre Random Forest e Holt-Winters não são critérios fixos de aprovação.
+
+A janela expansiva substitui o limite de oito semanas. Os artefatos de execuções anteriores com janela limitada não validam este protocolo: a execução integral, as métricas e os diagnósticos precisam ser regenerados antes de concluir a avaliação. Os testes rápidos de fonte e causalidade não substituem essa etapa.
 
 ## Casos de teste
 
@@ -30,7 +34,7 @@ Esses números são uma **fotografia da versão atual dos dados**, não uma regr
 | D04 | P0 na entrega final | Confirmar o congelamento da base com a turma e eventuais aprovações. | O hash da versão usada coincide com o registro comum das cinco bases; qualquer alteração de base, horizonte, protocolo ou conjunto oficial de modelos tem aprovação documentada. O hash local, sozinho, prova reprodutibilidade, não igualdade com a versão da turma. |
 | S01 | P1 | Revisar STL de tendência, sazonalidade, resíduo e força sazonal. | Além dos gráficos e cálculos, o texto interpreta períodos de crescimento/queda, padrão sazonal, resíduos e o valor da força calculada, usando somente dados anteriores ao teste. |
 | T01 | P0 | Recalcular o corte 80/20 e os dois folds. | Desenvolvimento e teste não se sobrepõem; ambos os folds e toda seleção de hiperparâmetros terminam antes do teste; cada ajuste termina antes da primeira previsão do bloco. |
-| T02 | P0 | Inspecionar cada linha do log de ajustes. | Janela com no máximo 1.344 horas, datas em ordem e início de previsão posterior ao fim do ajuste; reajustes do teste a cada 168 horas, salvo o bloco final parcial. |
+| T02 | P0 | Inspecionar cada linha do log de ajustes. | Todos os ajustes começam na primeira hora da base; duração e quantidade de alvos observados coincidem com todo o prefixo anterior à origem, sem limite ou descarte das primeiras 168 horas. Datas em ordem e início de previsão posterior ao fim do ajuste; reajustes do teste a cada 168 horas, salvo o bloco final parcial. |
 | F01 | P0 | Verificar alinhamento de `lag1`, `lag24`, `lag168`, médias móveis e clima defasado em datas normais e perto de lacunas. | A feature da hora `t` não usa `traffic_volume[t]` nem clima medido em `t`; `lag1` corresponde a `t-1`. Lacunas mantêm sua posição no relógio. |
 | F02 | P0 | Teste de causalidade: modificar alvo e clima em `t` e depois recalcular as features. | Features e previsão emitida para `t` não mudam; previsões posteriores **podem** mudar depois que novas observações forem incorporadas. |
 | F03 | P0 | Instrumentar imputação, codificação e escala dentro de cada bloco. | `fit` recebe apenas linhas anteriores à previsão; validação/teste usam somente `transform`. Categoria climática inédita não causa falha nem reajuste com dados futuros. |
@@ -62,8 +66,8 @@ Esses números são uma **fotografia da versão atual dos dados**, não uma regr
 
 ## Execução e evidências
 
-1. **Smoke rápido:** validar notebook/entrada, um fold e um bloco curto por modelo em uma cópia de teste. Os cenários pequenos devem rodar antes da execução integral; não substituem a avaliação final.
-2. **Execução integral:** da raiz do repositório, executar `python -m nbconvert --to notebook --execute notebooks/02_base_02.ipynb --output base_02_execucao_teste.ipynb --output-dir results/test_runs --ExecutePreprocessor.timeout=1800` e conferir os casos P0 e P1 sem sobrescrever o notebook de trabalho.
+1. **Smoke rápido:** executar `python -m unittest discover -s tests -v -k Base02Protocol -k Base02Data` para validar fonte, dados, prefixos completos e causalidade sem ler métricas antigas. Conferir também um bloco curto de previsões por modelo com todo o histórico da origem. Os cenários curtos não substituem a avaliação final.
+2. **Execução integral:** da raiz do repositório, executar `python -m nbconvert --to notebook --execute notebooks/02_base_02.ipynb --output base_02_execucao_teste.ipynb --output-dir results/test_runs --ExecutePreprocessor.timeout=-1` e conferir os casos P0 e P1 sem sobrescrever o notebook de trabalho. A janela expansiva pode aumentar bastante o tempo; não reduzir o histórico para passar no teste.
 3. **Conferência independente:** recalcular métricas a partir de `results/predictions/base_02_predictions.csv`, comparar com `results/metrics/base_02_metrics.csv` e guardar manifesto, log de ajustes, relatório de resíduos e análise textual como evidências.
 
 O responsável pela Base 02 executa e registra os resultados; o sexto integrante revisa os testes de vazamento, as métricas e a integração com as demais bases. Uma falha P0 bloqueia a conclusão da base. Uma falha P1 deve ser corrigida ou aparecer explicitamente como limitação justificada no relatório. A implementação sugerida é uma suíte `tests/test_base_02.py` para as verificações rápidas e um teste de integração separado para a execução completa do notebook.

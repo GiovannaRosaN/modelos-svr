@@ -2,23 +2,23 @@
 
 ## Resultado principal
 
-Random Forest obteve o menor MAE: 185.62 veículos/h. O segundo foi Holt-Winters, com 186.83. A redução relativa foi 0.6%. A comparação usa 4805 horas com alvo observado entre 2018-03-14 04:00:00 e 2018-09-30 23:00:00.
+Random Forest obteve o menor MAE: 134.74 veículos/h. O segundo foi SVR, com 143.51. A redução relativa foi 6.1%. A comparação usa 4805 horas com alvo observado entre 2018-03-14 04:00:00 e 2018-09-30 23:00:00.
 
 ## Leitura por modelo
 
-- Random Forest: MAE 185.62, RMSE 319.87, viés -11.54 (superestimação média), tempo de teste 64.8 s. O MAE na validação foi 199.64.
-- Holt-Winters: MAE 186.83, RMSE 296.54, viés -1.31 (superestimação média), tempo de teste 0.6 s. O MAE na validação foi 223.65.
-- Decision Tree: MAE 249.94, RMSE 451.98, viés -12.55 (superestimação média), tempo de teste 1.9 s. O MAE na validação foi 259.18.
-- SARIMAX: MAE 291.97, RMSE 417.90, viés -5.32 (superestimação média), tempo de teste 575.1 s. O MAE na validação foi 341.34.
-- SVR: MAE 314.04, RMSE 494.93, viés 46.72 (subestimação média), tempo de teste 5.3 s. O MAE na validação foi 403.42.
+- Random Forest: MAE 134.74, RMSE 214.03, viés -9.67 (superestimação média), tempo de teste 1766.9 s. O MAE na validação foi 177.15.
+- SVR: MAE 143.51, RMSE 223.66, viés -0.65 (superestimação média), tempo de teste 1838.9 s. O MAE na validação foi 160.53.
+- Decision Tree: MAE 173.15, RMSE 275.41, viés -8.60 (superestimação média), tempo de teste 26.8 s. O MAE na validação foi 228.05.
+- Holt-Winters: MAE 199.14, RMSE 317.28, viés -2.33 (superestimação média), tempo de teste 1.3 s. O MAE na validação foi 225.89.
+- SARIMAX: MAE 290.41, RMSE 418.08, viés 1.48 (subestimação média), tempo de teste 3615.7 s. O MAE na validação foi 339.30.
 
 A diferença entre RMSE e MAE indica quanto erros grandes pesam no resultado. A diferença entre validação e teste também depende da época do ano e da dificuldade dos períodos; ela sozinha não comprova sobreajuste.
 
 ## Estabilidade e custo
 
-O menor tempo foi de Holt-Winters: 0.6 s. Os tempos dependem da máquina e incluem os reajustes semanais; a busca não está incluída.
-Vitórias por mês do teste: Holt-Winters: 4, Random Forest: 3. Meses extremos podem ser parciais.
-Para o vencedor, a hora de maior MAE foi 7h (320.81 veículos/h).
+O menor tempo foi de Holt-Winters: 1.3 s. Os tempos dependem da máquina e incluem os reajustes semanais; a busca não está incluída.
+Vitórias por mês do teste: Random Forest: 6, SVR: 1. Meses extremos podem ser parciais.
+Para o vencedor, a hora de maior MAE foi 23h (227.58 veículos/h).
 
 ## Resíduos
 
@@ -31,30 +31,27 @@ ACF e Ljung-Box usam 1588 horas contínuas, de 2018-06-02 03:00:00 até 2018-08-
 
 ## O que os modelos aproveitaram
 
-- SVR: maiores aumentos de MAE na permutação: volume_lag168 (288.5), volume_lag1 (228.0), variacao_1h (185.6).
-- Decision Tree: maiores aumentos de MAE na permutação: volume_lag1 (762.7), hora_cos (473.0), volume_lag168 (208.7).
-- Random Forest: maiores aumentos de MAE na permutação: volume_lag1 (867.6), volume_lag168 (369.1), hora_cos (218.0).
+- SVR: maiores aumentos de MAE na permutação: volume_lag1 (329.1), volume_lag24 (305.2), hora_cos (248.1).
+- Decision Tree: maiores aumentos de MAE na permutação: volume_lag1 (785.5), hora_cos (578.2), volume_lag168 (356.9).
+- Random Forest: maiores aumentos de MAE na permutação: volume_lag1 (747.4), hora_cos (454.5), volume_lag168 (201.5).
 
-As árvores representam relações não lineares; a floresta combina árvores para reduzir variabilidade. O SVR usa uma margem de tolerância e distâncias após padronização. SARIMAX combina dependência temporal e exógenas; Holt-Winters usa somente o histórico do alvo. Estas diferenças ajudam a formular hipóteses sobre os resultados, mas a importância de uma feature não demonstra causalidade.
+## Experimento adicional
 
-## Limitações e recomendação
+Decision Tree: MAE 173.15 veículos/h. Está fora do ranking oficial.
 
-Usar Random Forest como referência inicial para este horizonte, acompanhando erro por horário e mudanças ao longo do tempo. A recomendação vale para a busca limitada e a janela móvel de oito semanas deste experimento.
-- O teste tem observações ausentes. Elas não foram imputadas para calcular erros.
-- Holt-Winters usa preenchimento causal apenas na cópia de ajuste. SARIMAX recebe NaN; modelos tabulares usam alvos observados.
-- O resultado pressupõe acesso ao volume e ao clima da hora anterior. Atrasos reais de publicação exigem rever os lags.
-- Há medições meteorológicas extremas. A transformação logarítmica reduz escala, mas não comprova a qualidade dessas medições.
-- A busca usa duas semanas de validação, insuficientes para cobrir todas as estações. Novas decisões exigem outra validação, mantendo o teste protegido.
-- A sazonalidade e os coeficientes podem variar ao longo do tempo; conclusões são restritas à Base 02.
-- Os dados são horas locais sem fuso. A regularização existente não permite resolver ambiguidades de horário de verão.
-- O diagnóstico de resíduos usa um único trecho contínuo e não todo o teste.
-- Não foi calculado intervalo de confiança da diferença de MAE; uma diferença pequena pode não ser conclusiva.
-- SARIMAX: convergência confirmada nos 29 ajustes do teste.
+## Limitações e causalidade
 
-## Referências
+A sequência segue os 16 passos da Base 01, adaptados à previsão horária. O recorte é cronológico 80/20, com janela expansiva desde a primeira hora e reajuste semanal. Clima entra defasado; o alvo da hora prevista não entra nas features. Imputação e escala são aprendidas apenas no treino de cada janela.
+A busca considera uma grade pequena e somente duas semanas de validação. O melhor candidato não é um ótimo global, e pode não representar outras estações do ano.
+ACF/Ljung-Box cobrem 33.0% das horas observadas no teste; o trecho contínuo não representa automaticamente todo o período.
+As horas sem alvo real recebem previsão, mas não participam das métricas. Valores meteorológicos extremos requerem investigação da fonte; IQR não justifica remoção automática.
 
-- UCI: https://archive.ics.uci.edu/dataset/492/metro+interstate+traffic+volume
-- statsmodels, SARIMAXResults.extend: https://www.statsmodels.org/stable/generated/statsmodels.tsa.statespace.sarimax.SARIMAXResults.extend.html
-- statsmodels, Holt-Winters: https://www.statsmodels.org/stable/examples/notebooks/generated/exponential_smoothing.html
-- scikit-learn, SVR: https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html
-- scikit-learn, permutation importance: https://scikit-learn.org/stable/modules/permutation_importance.html
+## Benchmark semanal
+
+                 modelo  mae_mesmas_datas    n
+          Random Forest            134.86 4788
+                    SVR            143.47 4788
+          Decision Tree            172.92 4788
+           Holt-Winters            199.41 4788
+                SARIMAX            290.49 4788
+Sazonal ingênuo (168 h)            293.65 4788
