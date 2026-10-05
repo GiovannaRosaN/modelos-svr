@@ -6,7 +6,9 @@
   "treino_proporcao_grade": 0.8,
   "teste_inicio": "2018-03-14 04:00:00",
   "teste_fim": "2018-09-30 23:00:00",
-  "janela_ajuste_horas": 1344,
+  "janela_tipo": "expansiva",
+  "janela_ajuste_horas": null,
+  "treino_inicio_posicao": 0,
   "refit_horas": 168,
   "validacao_folds": [
     [
@@ -20,20 +22,20 @@
   ],
   "parametros": {
     "SVR": {
-      "C": 1000,
-      "epsilon": 50,
-      "gamma": 0.01
+      "C": 5000,
+      "epsilon": 100,
+      "gamma": "scale"
     },
     "Decision Tree": {
-      "max_depth": 10,
-      "min_samples_leaf": 5,
-      "min_samples_split": 10
+      "max_depth": 14,
+      "min_samples_leaf": 10,
+      "min_samples_split": 20
     },
     "Random Forest": {
-      "n_estimators": 80,
-      "max_depth": 12,
-      "min_samples_leaf": 2,
-      "min_samples_split": 4,
+      "n_estimators": 120,
+      "max_depth": null,
+      "min_samples_leaf": 4,
+      "min_samples_split": 8,
       "max_features": 0.8
     },
     "SARIMAX": {
@@ -50,12 +52,12 @@
       ]
     },
     "Holt-Winters": {
-      "trend": "add",
-      "damped_trend": true,
+      "trend": null,
+      "damped_trend": false,
       "seasonal_periods": 168,
-      "alpha": 0.4,
+      "alpha": 0.2,
       "beta": 0.02,
-      "gamma": 0.2
+      "gamma": 0.1
     }
   },
   "feature_cols": [
@@ -127,6 +129,16 @@
     "sklearn": "1.6.1",
     "statsmodels": "0.14.6"
   },
-  "protocolo": "one-step, janela móvel, reajuste semanal, estados e lags atualizados a cada hora",
+  "modelos_oficiais": [
+    "SARIMAX",
+    "Holt-Winters",
+    "Random Forest",
+    "SVR"
+  ],
+  "modelos_extras": [
+    "Decision Tree"
+  ],
+  "organizacao": "16 etapas da Pipeline 01 adaptadas ao trafego horario",
+  "protocolo": "one-step, janela expansiva, reajuste semanal, estados e lags atualizados a cada hora",
   "avaliacao": "somente alvos observados nas mesmas datas dos cinco modelos"
 }
