@@ -1,0 +1,21 @@
+base,modelo,mae,posicao,mae_relativo_ao_melhor,n_avaliado,tempo_s,fonte
+base_01,Holt-Winters,1317.7137005250845,1,1.0,365,47.39160370000173,results/metrics/base_01_metrics.csv
+base_01,SARIMAX,1363.0658862412522,2,1.0344173288158844,365,61.87665549999656,results/metrics/base_01_metrics.csv
+base_01,Random Forest,1524.471982776694,3,1.1569068320145872,365,5365.686803500001,results/metrics/base_01_metrics.csv
+base_01,SVR,1595.297169153405,4,1.2106553711308523,365,56.19054850000248,results/metrics/base_01_metrics.csv
+base_02,Random Forest,134.74157074196506,1,1.0,4805,1766.8768099999998,results/metrics/base_02_metrics.csv
+base_02,SVR,143.51371175374163,2,1.065103449243408,4805,1838.85556,results/metrics/base_02_metrics.csv
+base_02,Holt-Winters,199.13677570799004,3,1.477916389214017,4805,1.2946429000003263,results/metrics/base_02_metrics.csv
+base_02,SARIMAX,290.4112460470808,4,2.1553203250333834,4805,3615.7398061,results/metrics/base_02_metrics.csv
+base_03,Random Forest,9.925549679624842,1,1.0,6906,91.28321900000446,results/metrics/base_03_metrics.csv
+base_03,SARIMAX,9.945105338113317,2,1.0019702343063799,6906,290.9607813999756,results/metrics/base_03_metrics.csv
+base_03,Holt-Winters,10.371099547815302,3,1.044889188263808,6906,32.44727440000861,results/metrics/base_03_metrics.csv
+base_03,SVR,13.7164218399134,4,1.3819307023439171,6906,17.080086700007087,results/metrics/base_03_metrics.csv
+base_04,SVR,1.6468,1,1.0,767,25.888242,saída de notebooks/04_base_04.ipynb
+base_04,Random Forest,1.713614,2,1.0405720184600438,767,280.164241,saída de notebooks/04_base_04.ipynb
+base_04,SARIMAX,1.847894,3,1.1221119747388875,767,86.516653,saída de notebooks/04_base_04.ipynb
+base_04,Holt-Winters,3.43648,4,2.086762205489434,767,14.68626,saída de notebooks/04_base_04.ipynb
+base_05,SARIMAX,15.588360578840959,1,1.0,588,48.049849978,walk-forward executado neste notebook (seção 1.3)
+base_05,Holt-Winters,15.9903,2,1.025784585821335,588,,saída de notebooks/05_base_05.ipynb
+base_05,Random Forest,364.9088,3,23.409055631886854,588,,saída de notebooks/05_base_05.ipynb
+base_05,SVR,427.091,4,27.398070364096974,588,,saída de notebooks/05_base_05.ipynb

@@ -1,0 +1,44 @@
+data,integrante,demanda_realizada,entrega_ou_evidencia,carga_de_trabalho,complexidade,status
+14/09,Giovanna,Criação do Repositório,GitHub,Baixa,Baixa,Concluída
+15/09,Matheus,"Importação da base, auditoria temporal, limpeza e regularização e analise exploratória",Notebook 03_base_03.ipynb,Média,Média,Concluída
+15/09,Guilherme,Tratei a Base 2 e organizei os registros em ordem cronológica. A granularidade definida é horária e regular.,"Notebook 02_base_02.ipynb , tratar_granularidade_metro.py",Média,Baixa,Concluída
+21/09,Pietro,"Importação da base, auditoria temporal, limpeza e regularização e analise exploratória",Notebook 01_base_01.ipynb parte 1 a 4,Média,Média,Concluída
+21/09,Pietro,Decomposição STL e força de sazonalidade,Notebook 01_base_01.ipynb parte 5,Média,Média,Concluída
+21/09,Pietro,Feature engineering,Notebook 01_base_01.ipynb parte 6,Média,Alta,Concluída
+21/09,Giovanna,"Importação da base, auditoria temporal, limpeza e regularização e analise exploratória",Notebook 05_base_05.ipynb parte 1,Média,Média,Concluída
+21/09,Giovanna,Decomposição STL e força de sazonalidade,Notebook 05_base_05.ipynb parte 2,Média,Média,Em andamento
+21/09,Matheus,Decomposição STL e força de sazonalidade,Notebook 03_base_03.ipynb,Média,Média,Concluída
+21/09,Guilherme,Feature engineering,Notebook 02_base_02.ipynb,Média,Alta,Em andamento
+21/09,Sofia,Excel Organizacional,Este arquivo,Baixa,Baixa,Concluída
+21/09,Sofia,Organização e planejamento do relatório final,,Média,Média,Concluída
+22/09,Igor,"Importação da base, auditoria temporal, limpeza e regularização e analise exploratória",Notebook 04_base_04.ipynb parte 1 a 4,Média,Média,Concluída
+22/09,Pietro,Calculando melhores parametros para os modelos e divisão temporal,Notebook_01_base_01.ipynb parte 7 e 8,Média,Média,Concluída
+22/09,Pietro,Desenvolvimento dos modelos,Notebook_01_base_01.ipynb parte 9 e 10,Média,Alta,Concluída
+22/09,Igor,Decomposição STL e força de sazonalidade,Notebook 04_base_04.ipynb parte 5,Média,Média,Concluída
+22/09,Igor,Feature engineering,Notebook 04_base_04.ipynb parte 6,Média,Alta,Concluída
+22/09,Igor,Calculando melhores parametros para os modelos e divisão temporal,Notebook 04_base_04.ipynb parte 7 e 8,Média,Média,Concluída
+22/09,Sofia,Montagem do relatório final com tudo,,Alta,Média,Em andamento
+22/09,Giovanna,Feature engineering,Notebook 05_base_05.ipynb parte 3,Média,Alta,Concluída
+22/09,Giovanna,Calculando melhores parametros para os modelos,Notebook 05_base_05.ipynb parte 3,Média,Média,Concluída
+22/09,Guilherme,Vendo Sazonalidade da base,Notebook 02_base_02.ipynb,Média,Média,Em andamento
+22/09,Giovanna,Validação walk-forward iterativa com treinamento dos modelos e salvamento de previsões e valores reais.,"Notebook 05_base_05.ipynb parte 4, 5, 6, 78",Alta,Alta,Em andamento
+27/09,Guilherme,Criando Pipeline Sarimax,Notebook 02_base_02.ipynb,Média,Média,Concluída
+27/09,Guilherme,Criando Pipeline SVR,Notebook 02_base_02.ipynb,Média,Média,Concluída
+27/09,Guilherme,Criando Pipeline Random Forest,Notebook 02_base_02.ipynb,Média,Média,Concluída
+27/09,Guilherme,Criando Pipeline Holt Winters,Notebook 02_base_02.ipynb,Média,Média,Concluída
+28/09,Pietro,Realizando walk-forward dos modelos,Notebook_01_base_01.ipynb parte 11,Baixa,Média,Concluída
+28/09,Pietro,Comparação dos modelos usando MAE,Notebook_01_base_01.ipynb parte 13,Baixa,Baixa,Concluída
+28/09,Pietro,Analise dos residuos,Notebook_01_base_01.ipynb parte 14,Baixa,Baixa,Concluída
+28/09,Pietro,Interpretação das covariáveis e feature importance,Notebook_01_base_01.ipynb parte 15,Baixa,Baixa,Concluída
+28/09,Pietro,Exportação e validação dos artefatos,Notebook_01_base_01.ipynb parte 16,Baixa,Baixa,Concluída
+29/09,Pietro,Subida dos arquivos no repositório remoto,github,Baixa,Baixa,Concluída
+29/09,Igor,Realizando walk-forward dos modelos,Notebook_04_base_04.ipynb parte 11,Baixa,Média,Concluída
+29/09,Igor,Comparação dos modelos usando MAE,Notebook_04_base_04.ipynb parte 13,Baixa,Baixa,Concluída
+29/09,Igor,Analise dos residuos,Notebook_04_base_04.ipynb parte 14,Baixa,Baixa,Concluída
+29/09,Igor,Interpretação das covariáveis e feature importance,Notebook_04_base_04.ipynb parte 15,Baixa,Baixa,Concluída
+29/09,Igor,Exportação e validação dos artefatos,Notebook_04_base_04.ipynb parte 16,Baixa,Baixa,Concluída
+29/09,Giovanna,Criando Pipeline Sarimax,Notebook 05_base_05.ipynb,Média,Média,Concluída
+29/09,Giovanna,Criando Pipeline SVR,Notebook 05_base_05.ipynb,Média,Média,Concluída
+29/09,Giovanna,Criando Pipeline Random Forest,Notebook 05_base_05.ipynb,Média,Média,Concluída
+29/09,Giovanna,Criando Pipeline Holt Winters,Notebook 05_base_05.ipynb,Média,Média,Concluída
+04/10,Sofia,Consolidação MAE,06_comparacao_geral.ipynb,Média,Média,Concluída

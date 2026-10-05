@@ -1,0 +1,33 @@
+base,modelo,lag,estatistica,p_valor,fonte,sem_autocorrelacao_5pct
+base_01,Holt-Winters,10,12.184962780119896,0.2728683821613684,results/metrics/base_01_metrics.csv,True
+base_01,Random Forest,10,45.06848820880471,2.113720432361845e-06,results/metrics/base_01_metrics.csv,False
+base_01,SARIMAX,10,40.600335585280405,1.3278504722673726e-05,results/metrics/base_01_metrics.csv,False
+base_01,SVR,10,24.202405557732543,0.0070808925357664,results/metrics/base_01_metrics.csv,False
+base_02,Holt-Winters,24,1790.3014502538394,0.0,results/residuals/base_02_ljung_box.csv,False
+base_02,Holt-Winters,48,2148.0254273667115,0.0,results/residuals/base_02_ljung_box.csv,False
+base_02,Holt-Winters,168,2530.596341041868,0.0,results/residuals/base_02_ljung_box.csv,False
+base_02,Random Forest,24,79.52430385787838,7.242921031957383e-08,results/residuals/base_02_ljung_box.csv,False
+base_02,Random Forest,48,115.06002825655888,1.968740103502539e-07,results/residuals/base_02_ljung_box.csv,False
+base_02,Random Forest,168,240.7819056332209,0.0001967852188952,results/residuals/base_02_ljung_box.csv,False
+base_02,SARIMAX,24,460.53446704757056,2.5163379464563863e-82,results/residuals/base_02_ljung_box.csv,False
+base_02,SARIMAX,48,587.6732957863228,5.991993945545314e-94,results/residuals/base_02_ljung_box.csv,False
+base_02,SARIMAX,168,2023.291815776318,0.0,results/residuals/base_02_ljung_box.csv,False
+base_02,SVR,24,91.8571224596062,7.087589719168994e-10,results/residuals/base_02_ljung_box.csv,False
+base_02,SVR,48,120.97782761369211,3.1426274874025665e-08,results/residuals/base_02_ljung_box.csv,False
+base_02,SVR,168,277.7457575995757,2.0620132811722481e-07,results/residuals/base_02_ljung_box.csv,False
+base_03,Holt-Winters,24,664.6014232093147,6.821760835624471e-125,recalculado de results/residuals/base_03_residuals.csv,False
+base_03,Holt-Winters,48,757.8331363186104,2.2895525769514883e-128,recalculado de results/residuals/base_03_residuals.csv,False
+base_03,Random Forest,24,300.36045689673216,1.4188371246889541e-49,recalculado de results/residuals/base_03_residuals.csv,False
+base_03,Random Forest,48,371.7597172213071,1.2889797865823133e-51,recalculado de results/residuals/base_03_residuals.csv,False
+base_03,SARIMAX,24,243.0342848052871,3.948729633696645e-38,recalculado de results/residuals/base_03_residuals.csv,False
+base_03,SARIMAX,48,321.8915294797028,3.233947615542421e-42,recalculado de results/residuals/base_03_residuals.csv,False
+base_03,SVR,24,6907.54174827001,0.0,recalculado de results/residuals/base_03_residuals.csv,False
+base_03,SVR,48,6946.772345112882,0.0,recalculado de results/residuals/base_03_residuals.csv,False
+base_04,Holt-Winters,10,760.818838,5.440776e-157,saída de notebooks/04_base_04.ipynb,False
+base_04,Random Forest,10,15.105236,0.128272,saída de notebooks/04_base_04.ipynb,True
+base_04,SARIMAX,10,30.361228,0.0007474961,saída de notebooks/04_base_04.ipynb,False
+base_04,SVR,10,18.02515,0.05454087,saída de notebooks/04_base_04.ipynb,True
+base_05,Holt-Winters,10,34.69685792939867,0.00014064205061941059,resíduos reproduzidos neste notebook (seção 1.3),False
+base_05,Random Forest,10,5736.059471102677,0.0,resíduos reproduzidos neste notebook (seção 1.3),False
+base_05,SARIMAX,10,11.288983325745358,0.33545125103754614,resíduos reproduzidos neste notebook (seção 1.3),True
+base_05,SVR,10,5769.932215524648,0.0,resíduos reproduzidos neste notebook (seção 1.3),False
