@@ -1,0 +1,5 @@
+ranking,modelo,MAE,RMSE,MAPE_%,R2,vies_medio,horas_avaliadas,tempo_segundos,estrategia,parametros
+1,Random Forest,9.925549679624842,18.051073457005646,27.08835327374355,0.9538212423490122,0.09302951797415901,6906,91.28321900000446,walk_forward_1_passo_origem_movel,"{""n_estimators"": 150, ""max_depth"": 12, ""min_samples_split"": 4, ""min_samples_leaf"": 2, ""max_features"": 0.8}"
+2,SARIMAX,9.945105338113317,17.91915451820341,28.725797950196448,0.9544937334120349,-0.07242184703385088,6906,290.9607813999756,walk_forward_1_passo_origem_movel,"{""order"": [1, 0, 0], ""seasonal_order"": [0, 0, 0, 24]}"
+3,Holt-Winters,10.371099547815302,19.073401093257463,27.20211886662518,0.94844242750904,-0.0005238280093346271,6906,32.44727440000861,walk_forward_1_passo_origem_movel,"{""trend"": ""add"", ""damped_trend"": true, ""seasonal"": ""add""}"
+4,SVR,13.7164218399134,26.52841071544503,40.932967941606286,0.9002624620670332,1.266110446935125,6906,17.080086700007087,walk_forward_1_passo_origem_movel,"{""C"": 1.0, ""epsilon"": 0.1, ""gamma"": ""scale""}"
